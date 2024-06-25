@@ -6,7 +6,17 @@ steps:
   - id: "push image"
     name: "gcr.io/cloud-builders/docker"
     args: ["push", "gcr.io/${PROJECT_ID}/${_SERVICE_NAME}"]
-
+  - id: "deploy image"
+    name: gcr.io/google.com/cloudsdktool/cloud-sdk
+    args:
+      - run
+      - deploy
+      - img-service
+      - '--image'
+      - 'gcr.io/${PROJECT_ID}/${_SERVICE_NAME}'
+      - '--region'
+      - europe-west3
+    entrypoint: gcloud
 images:
   - "gcr.io/${PROJECT_ID}/${_SERVICE_NAME}"
 substitutions:
