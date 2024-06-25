@@ -4,6 +4,9 @@ require 'json'
 
 set port: 8080
 
+get '/up' do
+    'up and running!'
+end
 post '/resize' do
   begin
     content_type :json
